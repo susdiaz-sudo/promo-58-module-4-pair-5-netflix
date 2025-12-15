@@ -1,9 +1,10 @@
-@import url('//fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import url('//beta.adalab.es/resources/stylesheets/all.css');
+@import url("//fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("//beta.adalab.es/resources/stylesheets/all.css");
 
 * {
+  background-color: rgb(14, 15, 15);
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
