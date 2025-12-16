@@ -2,13 +2,28 @@
 
 const express = require("express");
 
+// Importar la biblioteca de CORS
+
+const cors = require("cors");
+
+const path = require("node:path");
+
 // Crear una variable con todo lo que puede hacer el servidor:
 
 const app = express();
+
+// Configuramos server para que funcione bien como API
+
+app.use(cors());
+app.use(express.json({ limit: "25Mb" }));
 
 // Arrancar el servidor en el puerto 3000:
 
 const port = 3000;
 app.listen(port, () => {
   console.log(`Uh! El servidor ya está arrancado: <http://localhost:${port}/>`);
+});
+
+app.get("/", (req, res) => {
+  res.send("Hola Adalabers!");
 });
