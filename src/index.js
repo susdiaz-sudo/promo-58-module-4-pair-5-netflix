@@ -24,6 +24,18 @@ app.listen(port, () => {
   console.log(`Uh! El servidor ya está arrancado: <http://localhost:${port}/>`);
 });
 
+//ENDPOINT
 app.get("/", (req, res) => {
   res.send("Hola Adalabers!");
 });
+
+/*
+//ENDPOINT DEL API
+app.get(`/api/proyects`, (req, res) => {});
+app.post(`/api/proyect`, (req, res) => {});
+
+//SERVIDOR DE FICHEROS DINÀMICOS
+
+
+//SERVIDOR DE FICHEROS ESTÁTICOS
+*/
