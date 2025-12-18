@@ -77,15 +77,7 @@ const connection = async () => {
   return connection;
 };
 
-
-// Configurar la conexión a la base de datos MySQL
-/* const connection = await mysql.createConnection({
-  host: process.env.DB_HOST || 'localhost',
-  port: process.env.DB_PORT || 3306,
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || 'equipo5ada',
-  database: process.env.DB_NAME || 'netflix'
-}); */
+// Endpoint obtener películas desde la base de datos
 
 server.get("/movies", async (req, res) => {
   console.log("Se ha recibido una petición GET en /movies");
