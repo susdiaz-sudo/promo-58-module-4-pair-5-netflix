@@ -11,6 +11,7 @@ const server = express();
 server.use(cors());
 server.use(express.json({ limit: "25Mb" }));
 
+/*
 const fakeMovies = [
   {
     id: 1,
@@ -34,6 +35,7 @@ const fakeMovies = [
   },
 ];
 
+
 // Endpoint obtener películas
 server.get("/movies", (req, res) => {
   console.log("Se ha recibido una petición GET en /movies");
@@ -41,15 +43,64 @@ server.get("/movies", (req, res) => {
   //respuesta
   const response = {
     success: true,
-    movies: fakeMovies,
+    movies: results,
   };
 
   //Envio
   res.json(response);
 });
+*/
+
 
 // init express aplication
 const serverPort = 4000;
 server.listen(serverPort, () => {
   console.log(`Server listening at http://localhost:${serverPort}`);
+});
+
+// Instalar y configurar mysql usando "npm install mysql"
+const mysql = require("mysql2/promise");
+
+// Instalar y configurar dotenv usando "npm install dotenv"
+require("dotenv").config();
+
+
+// Configurar la conexión a la base de datos MySQL
+const connection = async () => {
+  const connection = await mysql.createConnection({
+    host: process.env.DB_HOST || 'localhost',
+    port: process.env.DB_PORT || 3306,
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD || 'equipo5ada',
+    database: process.env.DB_NAME || 'netflix'
+  });
+  return connection;
+};
+
+
+// Configurar la conexión a la base de datos MySQL
+/* const connection = await mysql.createConnection({
+  host: process.env.DB_HOST || 'localhost',
+  port: process.env.DB_PORT || 3306,
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || 'equipo5ada',
+  database: process.env.DB_NAME || 'netflix'
+}); */
+
+server.get("/movies", async (req, res) => {
+  console.log("Se ha recibido una petición GET en /movies");
+
+  let dbConn = await connection();
+
+  try {
+    const [results] = await dbConn.execute("SELECT * FROM movies");
+    const response = {
+      success: true,
+      movies: results,
+    };
+    res.json(response);
+  } catch (error) {
+    console.error("Error al obtener las películas:", error);
+    res.status(500).json({ success: false, message: "Error del servidor" });
+  }
 });
